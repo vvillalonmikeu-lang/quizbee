@@ -535,6 +535,15 @@ function displayQuestion() {
 
     timerPaused = false;
 
+    // Clear any highlighted choices from previous question
+    ["choiceA","choiceB","choiceC","choiceD"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.style.color = "";
+            el.style.textShadow = "";
+        }
+    });
+
     let currentRound = rounds[rIndex];
     let list = questions[currentRound] || [];
 
@@ -546,11 +555,11 @@ function displayQuestion() {
 
     let q = list[qIndex];
 
-    document.getElementById("roundLabel").innerText =
-        currentRound + " ROUND";
+    const roundLabelEl = document.getElementById("roundLabel");
+    if (roundLabelEl) roundLabelEl.innerText = currentRound + " ROUND";
 
-    document.getElementById("questionNumber").innerText =
-        "Question " + (qIndex + 1) + " of " + list.length;
+    const questionNumberEl = document.getElementById("questionNumber");
+    if (questionNumberEl) questionNumberEl.innerText = "Question " + (qIndex + 1) + " of " + list.length;
 
     // AUTO-RESIZE QUESTION TEXT
     let questionSize = "72px";
@@ -654,10 +663,11 @@ function displayQuestion() {
         `;
     }
 
-    document.getElementById("question").innerHTML = questionHTML;
+    const questionEl = document.getElementById("question");
+    if (questionEl) questionEl.innerHTML = questionHTML;
 
     const timerContainer = document.getElementById("timerContainer");
-    timerContainer.innerHTML = `
+    if (timerContainer) timerContainer.innerHTML = `
         <div style="display:flex; justify-content:center; gap:20px;">
             <button onclick="prevQuestion()" style="padding:12px 18px; font-size:22px;">◀</button>
             <button id="revealBtn" onclick="revealAnswerInline()" style="padding:12px 18px; font-size:18px;">Reveal Answer</button>
@@ -665,7 +675,8 @@ function displayQuestion() {
         </div>
     `;
 
-    document.getElementById("timerText").style.display = "none";
+    const timerTextEl = document.getElementById("timerText");
+    if (timerTextEl) timerTextEl.style.display = "none";
 
     currentAnswer = q.answer;
 }
