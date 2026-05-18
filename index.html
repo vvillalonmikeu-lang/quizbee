@@ -668,6 +668,7 @@ function displayQuestion() {
 
     const timerContainer = document.getElementById("timerContainer");
     if (timerContainer) timerContainer.innerHTML = `
+        <div id="inlineAnswer" style="margin-bottom:10px; font-size:28px; min-height:34px; color:transparent;"></div>
         <div style="display:flex; justify-content:center; gap:20px;">
             <button onclick="prevQuestion()" style="padding:12px 18px; font-size:22px;">◀</button>
             <button id="revealBtn" onclick="revealAnswerInline()" style="padding:12px 18px; font-size:18px;">Reveal Answer</button>
@@ -709,10 +710,12 @@ function revealAnswerInline() {
     const revealBtn = document.getElementById("revealBtn");
 
     if (currentRound === 'HARD' || currentRound === 'CLINCHER') {
-        const answerEl = document.getElementById('answer');
-        answerEl.innerText = currentAnswer || '';
-        answerEl.style.color = '#00ff00';
-        answerEl.style.textShadow = '0 0 20px #00ff00';
+            const inlineEl = document.getElementById('inlineAnswer');
+            if (inlineEl) {
+                inlineEl.innerText = currentAnswer || '';
+                inlineEl.style.color = '#00ff00';
+                inlineEl.style.textShadow = '0 0 20px #00ff00';
+            }
         if (revealBtn) revealBtn.style.display = 'none';
         return;
     }
