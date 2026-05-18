@@ -354,7 +354,7 @@ function startQuiz() {
         return;
     }
 
-    fetch("get_questions.php")
+    fetch("/api/questions")
         .then(res => res.json())
         .then(data => {
             questions = data[selectedLevel] || {};

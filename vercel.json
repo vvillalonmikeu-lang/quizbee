@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/get_questions.php",
+      "destination": "/api/questions"
+    },
+    {
+      "source": "/admin.php",
+      "destination": "/admin.html"
+    }
+  ]
+}

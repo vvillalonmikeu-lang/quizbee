@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DICT Quiz Admin Panel</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Orbitron', sans-serif;
+    min-height:100vh;
+    background:
+    linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)),
+    url("bg.jpg");
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+}
+
+.container{
+    width:90%;
+    max-width:800px;
+    background:rgba(15,23,42,0.92);
+    border:2px solid cyan;
+    border-radius:25px;
+    padding:40px;
+    box-shadow:
+    0 0 25px cyan,
+    0 0 50px rgba(0,255,255,0.3);
+    backdrop-filter:blur(10px);
+}
+
+.title{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.title h1{
+    font-size:45px;
+    color:#00ffff;
+    text-shadow:
+    0 0 10px cyan,
+    0 0 25px cyan;
+}
+
+.title p{
+    margin-top:10px;
+    color:#94a3b8;
+    font-size:14px;
+}
+
+.message{
+    display:none;
+    text-align:center;
+    padding:15px;
+    margin-bottom:25px;
+    border-radius:12px;
+    font-size:18px;
+}
+
+.message.success{
+    display:block;
+    background:#022c22;
+    color:#4ade80;
+    box-shadow:0 0 15px #22c55e;
+}
+
+.message.error{
+    display:block;
+    background:#450a0a;
+    color:#fca5a5;
+    box-shadow:0 0 15px #ef4444;
+}
+
+label{
+    display:block;
+    margin-bottom:10px;
+    margin-top:20px;
+    color:#67e8f9;
+    font-size:16px;
+}
+
+select,
+textarea,
+input{
+    width:100%;
+    padding:16px;
+    border:none;
+    border-radius:15px;
+    background:#111827;
+    color:white;
+    font-size:16px;
+    outline:none;
+    border:2px solid transparent;
+    transition:0.3s;
+}
+
+select:focus,
+textarea:focus,
+input:focus{
+    border:2px solid cyan;
+    box-shadow:0 0 15px cyan;
+}
+
+textarea{
+    resize:none;
+}
+
+button{
+    width:100%;
+    margin-top:30px;
+    padding:18px;
+    border:none;
+    border-radius:15px;
+    background:linear-gradient(90deg,#00ffff,#00bcd4);
+    color:black;
+    font-size:20px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+    box-shadow:0 0 20px cyan;
+}
+
+button:hover{
+    transform:scale(1.03);
+    box-shadow:
+    0 0 25px cyan,
+    0 0 50px cyan;
+}
+
+button:disabled{
+    cursor:wait;
+    opacity:0.75;
+}
+
+.logo{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    margin-bottom:25px;
+}
+
+.logo img{
+    width:100px;
+    filter:drop-shadow(0 0 15px cyan);
+}
+
+.footer{
+    margin-top:25px;
+    text-align:center;
+    color:#64748b;
+    font-size:12px;
+}
+
+#choicesBox{
+    display:none;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="logo">
+        <img src="dict_logo.png" alt="DICT logo">
+        <img src="carmona_logo.png" alt="Carmona logo">
+    </div>
+
+    <div class="title">
+        <h1>DICT QUIZ ADMIN</h1>
+        <p>Add questions directly into MongoDB through the Vercel API</p>
+    </div>
+
+    <div id="message" class="message"></div>
+
+    <form id="questionForm">
+        <label for="level">LEVEL</label>
+        <select id="level" name="level" required>
+            <option value="">Select Level</option>
+            <option value="ELEMENTARY">ELEMENTARY</option>
+            <option value="JUNIOR">JUNIOR HIGH</option>
+            <option value="SENIOR">SENIOR HIGH</option>
+        </select>
+
+        <label for="round">ROUND</label>
+        <select id="round" name="round" required>
+            <option value="">Select Round</option>
+            <option value="EASY">EASY</option>
+            <option value="INTERMEDIATE">INTERMEDIATE</option>
+            <option value="HARD">HARD</option>
+            <option value="CLINCHER">CLINCHER</option>
+        </select>
+
+        <label for="question">QUESTION</label>
+        <textarea
+        id="question"
+        name="question"
+        rows="6"
+        placeholder="Type your question here..."
+        required></textarea>
+
+        <div id="choicesBox">
+            <label for="choice_a">CHOICE A</label>
+            <input id="choice_a" type="text" name="choice_a">
+
+            <label for="choice_b">CHOICE B</label>
+            <input id="choice_b" type="text" name="choice_b">
+
+            <label for="choice_c">CHOICE C</label>
+            <input id="choice_c" type="text" name="choice_c">
+
+            <label for="choice_d">CHOICE D</label>
+            <input id="choice_d" type="text" name="choice_d">
+        </div>
+
+        <label for="answer">CORRECT ANSWER</label>
+        <input
+        id="answer"
+        type="text"
+        name="answer"
+        placeholder="Type correct answer..."
+        required>
+
+        <button id="submitBtn" type="submit">ADD QUESTION</button>
+    </form>
+
+    <div class="footer">
+        DICT Quiz Bee System
+    </div>
+
+</div>
+
+<script>
+const questionForm = document.getElementById("questionForm");
+const roundSelect = document.getElementById("round");
+const choicesBox = document.getElementById("choicesBox");
+const submitButton = document.getElementById("submitBtn");
+const messageBox = document.getElementById("message");
+
+function isMultipleChoiceRound(round) {
+    return round === "EASY" || round === "INTERMEDIATE";
+}
+
+function toggleChoices(round) {
+    const showChoices = isMultipleChoiceRound(round);
+    choicesBox.style.display = showChoices ? "block" : "none";
+
+    ["choice_a", "choice_b", "choice_c", "choice_d"].forEach((fieldId) => {
+        const input = document.getElementById(fieldId);
+        input.required = showChoices;
+
+        if (!showChoices) {
+            input.value = "";
+        }
+    });
+}
+
+function setMessage(type, text) {
+    messageBox.className = `message ${type}`;
+    messageBox.textContent = text;
+}
+
+roundSelect.addEventListener("change", function() {
+    toggleChoices(this.value);
+});
+
+questionForm.addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    submitButton.disabled = true;
+    submitButton.textContent = "SAVING...";
+
+    const formData = new FormData(questionForm);
+    const payload = Object.fromEntries(formData.entries());
+
+    try {
+        const response = await fetch("/api/questions", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.error || "Failed to save question.");
+        }
+
+        setMessage("success", "Question saved successfully.");
+        questionForm.reset();
+        toggleChoices("");
+    } catch (error) {
+        setMessage("error", error.message);
+    } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = "ADD QUESTION";
+    }
+});
+</script>
+
+</body>
+</html>
