@@ -296,9 +296,6 @@ button:hover {
     <div id="timerContainer">
         <div id="timerBar"></div>
     </div>
-    <div id="timerText">10</div>
-
-    <div id="timesup">TIME'S UP!</div>
     <div id="answer"></div>
 
 </div>
@@ -696,6 +693,20 @@ function prevQuestion() {
 
 // REVEAL ANSWER
 function revealAnswerInline() {
+    // If this is a HARD or CLINCHER round, show the textual answer
+    const currentRound = rounds[rIndex];
+    const revealBtn = document.getElementById("revealBtn");
+
+    if (currentRound === 'HARD' || currentRound === 'CLINCHER') {
+        const answerEl = document.getElementById('answer');
+        answerEl.innerText = currentAnswer || '';
+        answerEl.style.color = '#00ff00';
+        answerEl.style.textShadow = '0 0 20px #00ff00';
+        if (revealBtn) revealBtn.style.display = 'none';
+        return;
+    }
+
+    // Otherwise, it's a multiple-choice round — highlight the correct choice
     let letter = "";
     if (currentAnswer && typeof currentAnswer === 'string') {
         const trimmed = currentAnswer.trim();
@@ -724,7 +735,6 @@ function revealAnswerInline() {
         }
     }
 
-    const revealBtn = document.getElementById("revealBtn");
     if (revealBtn) revealBtn.style.display = "none";
 }
 function endClincher() {
