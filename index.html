@@ -369,7 +369,7 @@ rounds.forEach(r => {
         questions[r] = questions[r]
             .sort(() => Math.random() - 0.5);
 
-        // ONLY LIMIT EASY / INTERMEDIATE / HARD
+        // ONLY LIMIT EASY / INTERMEDIATE / HARD /
         if (r !== "CLINCHER") {
             questions[r] = questions[r].slice(0, 5);
         }
