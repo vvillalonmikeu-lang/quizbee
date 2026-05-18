@@ -198,8 +198,7 @@ button:hover {
 }
 #timerContainer {
     width: 85%;
-    height: 50px;
-    background: #222;
+    height: 60px;
     border-radius: 40px;
     overflow: hidden;
     margin: 60px auto 25px auto;
@@ -646,19 +645,19 @@ function displayQuestion() {
             line-height:1.3;
         ">
 
-            <div>
+            <div id="choiceA" data-letter="A">
                 A. ${q.choice_a}
             </div>
 
-            <div>
+            <div id="choiceB" data-letter="B">
                 B. ${q.choice_b}
             </div>
 
-            <div>
+            <div id="choiceC" data-letter="C">
                 C. ${q.choice_c}
             </div>
 
-            <div>
+            <div id="choiceD" data-letter="D">
                 D. ${q.choice_d}
             </div>
 
@@ -687,11 +686,15 @@ function displayQuestion() {
 function prevQuestion() {
     clearInterval(timerInterval);
 
-    // UNHIGHLIGHT
-    const answerEl = document.getElementById("answer");
-    answerEl.innerText = "";
-    answerEl.style.color = "";
-    answerEl.style.textShadow = "";
+    // UNHIGHLIGHT CHOICES
+    const choiceIds = ["choiceA", "choiceB", "choiceC", "choiceD"];
+    choiceIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.style.color = "";
+            el.style.textShadow = "";
+        }
+    });
 
     if (qIndex > 0) {
         qIndex--;
@@ -701,10 +704,33 @@ function prevQuestion() {
 
 // REVEAL ANSWER
 function revealAnswerInline() {
-    const answerEl = document.getElementById("answer");
-    answerEl.innerText = currentAnswer;
-    answerEl.style.color = "#00ff00";
-    answerEl.style.textShadow = "0 0 20px #00ff00";
+    let letter = "";
+    if (currentAnswer && typeof currentAnswer === 'string') {
+        const trimmed = currentAnswer.trim();
+        const first = trimmed.charAt(0).toUpperCase();
+        if (["A","B","C","D"].includes(first)) {
+            letter = first;
+        }
+    }
+
+    if (!letter) {
+        const choiceMap = { A: document.getElementById('choiceA'), B: document.getElementById('choiceB'), C: document.getElementById('choiceC'), D: document.getElementById('choiceD') };
+        for (const k of Object.keys(choiceMap)) {
+            const el = choiceMap[k];
+            if (el && currentAnswer && el.innerText && currentAnswer.indexOf(el.innerText.replace(/^\s*/, '')) !== -1) {
+                letter = k;
+                break;
+            }
+        }
+    }
+
+    if (letter) {
+        const target = document.getElementById('choice' + letter);
+        if (target) {
+            target.style.color = '#00ff00';
+            target.style.textShadow = '0 0 20px #00ff00';
+        }
+    }
 
     const revealBtn = document.getElementById("revealBtn");
     if (revealBtn) revealBtn.style.display = "none";
