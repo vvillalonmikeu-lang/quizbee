@@ -330,7 +330,6 @@ let qIndex = 0;
 let timerInterval = null;
 let timerPaused = false;
 let currentAnswer = "";
-let popupCountdown;
 
 
 
@@ -669,97 +668,46 @@ function displayQuestion() {
 
     document.getElementById("question").innerHTML = questionHTML;
 
+    const timerContainer = document.getElementById("timerContainer");
+    timerContainer.innerHTML = `
+        <div style="display:flex; justify-content:center; gap:20px;">
+            <button onclick="prevQuestion()" style="padding:12px 18px; font-size:22px;">◀</button>
+            <button id="revealBtn" onclick="revealAnswerInline()" style="padding:12px 18px; font-size:18px;">Reveal Answer</button>
+            <button onclick="nextQuestion()" style="padding:12px 18px; font-size:22px;">▶</button>
+        </div>
+    `;
+
+    document.getElementById("timerText").style.display = "none";
+
     currentAnswer = q.answer;
-
-    startTimer();
 }
 
-function startTimer() {
-    let time = 10;
-    let bar = document.getElementById("timerBar");
-    let text = document.getElementById("timerText");
 
-    bar.style.width = "0%";
-    bar.style.background = "#00ff00";
-bar.style.boxShadow = "0 0 20px #00ff00";
-    text.innerText = time;
-
+// PREVIOUS QUESTION
+function prevQuestion() {
     clearInterval(timerInterval);
 
-    timerInterval = setInterval(() => {
-        if (timerPaused) return;
+    // UNHIGHLIGHT
+    const answerEl = document.getElementById("answer");
+    answerEl.innerText = "";
+    answerEl.style.color = "";
+    answerEl.style.textShadow = "";
 
-        time--;
-        text.innerText = time;
-
-        let percent = ((10 - time) / 10) * 100;
-        bar.style.width = percent + "%";
-
-        // Change color when low
-        if (time <= 3) {
-    bar.style.background = "#ff0000";
-    bar.style.boxShadow = "0 0 20px #ff0000";
-}
-
-        if (time <= 0) {
-            clearInterval(timerInterval);
-            showAnswer();
-        }
-    }, 1000);
-}
-
-
-function showAnswer() {
-
-    timerPaused = true;
-
-    clearInterval(timerInterval);
-
-    document.getElementById("timesup").style.display = "block";
-
-    document.getElementById("popupAnswer").innerText = currentAnswer;
-
-    document.getElementById("answerPopup").style.display = "flex";
-
-    // SHOW END BUTTON ONLY DURING CLINCHER
-    if (rounds[rIndex] === "CLINCHER") {
-        document.getElementById("endClincherBtn").style.display = "inline-block";
-    } else {
-        document.getElementById("endClincherBtn").style.display = "none";
+    if (qIndex > 0) {
+        qIndex--;
+        displayQuestion();
     }
-
-    // AUTO NEXT TIMER
-    let countdown = 5;
-
-    document.getElementById("popupTimer").innerText =
-        "Next question in " + countdown;
-
-    clearInterval(popupCountdown);
-
-    popupCountdown = setInterval(() => {
-
-        countdown--;
-
-        document.getElementById("popupTimer").innerText =
-            "Next question in " + countdown;
-
-        if (countdown <= 0) {
-
-            clearInterval(popupCountdown);
-
-            closePopup();
-        }
-
-    }, 1000);
 }
 
-function closePopup() {
+// REVEAL ANSWER
+function revealAnswerInline() {
+    const answerEl = document.getElementById("answer");
+    answerEl.innerText = currentAnswer;
+    answerEl.style.color = "#00ff00";
+    answerEl.style.textShadow = "0 0 20px #00ff00";
 
-    clearInterval(popupCountdown);
-
-    document.getElementById("answerPopup").style.display = "none";
-
-    nextQuestion();
+    const revealBtn = document.getElementById("revealBtn");
+    if (revealBtn) revealBtn.style.display = "none";
 }
 function endClincher() {
 
@@ -788,71 +736,6 @@ document.addEventListener("keydown", function(e) {
 });
 </script>
 
-<!-- ANSWER POPUP -->
-<div id="answerPopup" style="
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.85);
-justify-content:center;
-align-items:center;
-z-index:9999;
-">
-
-    <div style="
-    background:#111;
-    padding:50px;
-    border-radius:20px;
-    width:600px;
-    text-align:center;
-    box-shadow:0 0 30px cyan;
-    ">
-
-        <h1 style="
-        color:lime;
-        font-size:50px;
-        margin-bottom:20px;
-        ">
-            CORRECT ANSWER
-        </h1>
-
-        <div id="popupAnswer" style="
-        font-size:40px;
-        color:white;
-        margin-bottom:30px;
-        ">
-        </div>
-
-        <button onclick="closePopup()">
-            NEXT QUESTION
-        </button>
-        </button>
-
-<div id="popupTimer" style="
-margin-top:20px;
-font-size:28px;
-color:cyan;
-">
-Next question in 5
-</div>
-
-        <button id="endClincherBtn"
-onclick="endClincher()"
-style="
-margin-top:15px;
-background:red;
-color:white;
-display:none;
-">
-    END CLINCHER
-</button>
-
-    </div>
-
-</div>
 
 </body>
 </html>
