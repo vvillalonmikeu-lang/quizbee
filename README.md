@@ -80,7 +80,8 @@ If `admin.php` is used, it redirects to `admin.html`.
 - After saving, the page shows a success message if the question was added successfully.
 - If something goes wrong, the page shows an error message.
 
-## Recommended Use
+## Recommended Use for this
+
 
 - Use the main page during the live event.
 - Use the admin page before the event to prepare questions.
