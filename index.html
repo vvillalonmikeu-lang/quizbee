@@ -338,9 +338,16 @@ function shuffle(array) {
 function sanitizeChoice(text) {
     if (!text && text !== 0) return '';
     let t = String(text).trim();
-    // remove a leading letter (A-D) followed by common separators like '.', ')', or '-'
     t = t.replace(/^[A-D]\s*[\.\)\-]\s*/i, '');
     return t;
+}
+
+function questionHasChoices(q) {
+    if (!q) return false;
+    return Boolean((q.choice_a && String(q.choice_a).trim() !== '') ||
+                   (q.choice_b && String(q.choice_b).trim() !== '') ||
+                   (q.choice_c && String(q.choice_c).trim() !== '') ||
+                   (q.choice_d && String(q.choice_d).trim() !== ''));
 }
 
 function startQuiz() {
@@ -620,8 +627,8 @@ function displayQuestion() {
         </div>
     `;
 
-    // EASY + INTERMEDIATE ONLY
-    if (currentRound === "EASY" || currentRound === "INTERMEDIATE") {
+    const qHasChoices = questionHasChoices(q);
+    if (currentRound === "EASY" || currentRound === "INTERMEDIATE" || qHasChoices) {
 
         questionHTML += `
 
@@ -713,22 +720,23 @@ function prevQuestion() {
 
 // REVEAL ANSWER
 function revealAnswerInline() {
-    // If this is a HARD or CLINCHER round, show the textual answer
     const currentRound = rounds[rIndex];
     const revealBtn = document.getElementById("revealBtn");
+    const list = questions[currentRound] || [];
+    const q = list[qIndex] || {};
+    const qHasChoices = questionHasChoices(q);
 
-    if (currentRound === 'HARD' || currentRound === 'CLINCHER') {
-            const inlineEl = document.getElementById('inlineAnswer');
-            if (inlineEl) {
-                inlineEl.innerText = currentAnswer || '';
-                inlineEl.style.color = '#00ff00';
-                inlineEl.style.textShadow = '0 0 20px #00ff00';
-            }
+    if (!qHasChoices) {
+        const inlineEl = document.getElementById('inlineAnswer');
+        if (inlineEl) {
+            inlineEl.innerText = currentAnswer || '';
+            inlineEl.style.color = '#00ff00';
+            inlineEl.style.textShadow = '0 0 20px #00ff00';
+        }
         if (revealBtn) revealBtn.style.display = 'none';
         return;
     }
 
-    // Otherwise, it's a multiple-choice round — highlight the correct choice
     let letter = "";
     if (currentAnswer && typeof currentAnswer === 'string') {
         const trimmed = currentAnswer.trim();
@@ -742,9 +750,12 @@ function revealAnswerInline() {
         const choiceMap = { A: document.getElementById('choiceA'), B: document.getElementById('choiceB'), C: document.getElementById('choiceC'), D: document.getElementById('choiceD') };
         for (const k of Object.keys(choiceMap)) {
             const el = choiceMap[k];
-            if (el && currentAnswer && el.innerText && currentAnswer.indexOf(el.innerText.replace(/^\s*/, '')) !== -1) {
-                letter = k;
-                break;
+            if (el && currentAnswer && el.innerText) {
+                const choiceText = el.innerText.replace(/^[A-D]\s*[\.\)\-]?\s*/i, '').trim();
+                if (choiceText && currentAnswer.indexOf(choiceText) !== -1) {
+                    letter = k;
+                    break;
+                }
             }
         }
     }
