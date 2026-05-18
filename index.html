@@ -335,6 +335,14 @@ function shuffle(array) {
     }
 }
 
+function sanitizeChoice(text) {
+    if (!text && text !== 0) return '';
+    let t = String(text).trim();
+    // remove a leading letter (A-D) followed by common separators like '.', ')', or '-'
+    t = t.replace(/^[A-D]\s*[\.\)\-]\s*/i, '');
+    return t;
+}
+
 function startQuiz() {
     if (!selectedLevel) {
         alert("Please select a level first!");
@@ -644,19 +652,19 @@ function displayQuestion() {
         ">
 
             <div id="choiceA" data-letter="A">
-                A. ${q.choice_a}
+                A. ${sanitizeChoice(q.choice_a)}
             </div>
 
             <div id="choiceB" data-letter="B">
-                B. ${q.choice_b}
+                B. ${sanitizeChoice(q.choice_b)}
             </div>
 
             <div id="choiceC" data-letter="C">
-                C. ${q.choice_c}
+                C. ${sanitizeChoice(q.choice_c)}
             </div>
 
             <div id="choiceD" data-letter="D">
-                D. ${q.choice_d}
+                D. ${sanitizeChoice(q.choice_d)}
             </div>
 
         </div>
