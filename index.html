@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<title>DICT Quiz Bee</title>
+<style>
+    
+body {
+    margin: 0;
+
+    font-family: 'Orbitron', sans-serif;
+
+    text-align: center;
+
+    color: #00F5FF;
+
+    background:
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)),
+        url("6099605.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    background-color: #020B1C;
+    
+overflow-x: hidden;
+overflow-y: auto;
+}
+
+@keyframes moveBg {
+    from { background-position: 0 0; }
+    to { background-position: 1000px 0; }
+}
+#homeLogo {
+    width: 220px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 20px cyan);
+}
+#homeLogos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    margin-bottom: 30px;
+}
+
+#homeLogo {
+    width: 280px;
+    filter: drop-shadow(0 0 15px cyan)
+    drop-shadow(0 0 30px #00F5FF);
+}
+#homeLogo2 {
+    width: 220px;
+
+    filter: drop-shadow(0 0 15px cyan);
+}
+
+#gameLogo {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    width: 120px;
+    opacity: 1;
+
+    filter: drop-shadow(0 0 15px cyan);
+    z-index: 999;
+}
+
+#gameLogo2 {
+    position: absolute;
+
+    top: 20px;
+
+    left: 30px;
+
+    width: 60px;
+
+    opacity: 1;
+
+    filter:
+        drop-shadow(0 0 15px cyan);
+
+    z-index: 999;
+}
+
+#startScreen {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#logo {
+    font-size: 95px;
+    font-weight: 900;
+    letter-spacing: 4px;
+
+    color: #00F5FF;
+
+    text-shadow:
+        0 0 10px #00F5FF,
+        0 0 20px #00D9FF,
+        0 0 40px #00D9FF;
+
+    margin-bottom: 30px;
+}
+
+button {
+    padding: 18px 38px;
+
+    font-size: 22px;
+
+    border: 2px solid #00F5FF;
+
+    border-radius: 14px;
+
+    background: rgba(0, 245, 255, 0.12);
+
+    color: white;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+
+    backdrop-filter: blur(8px);
+
+    box-shadow:
+        0 0 10px #00D9FF,
+        inset 0 0 10px rgba(0,255,255,0.2);
+}
+
+button:hover {
+
+    transform: scale(1.08);
+
+    background: #00F5FF;
+
+    color: black;
+
+    box-shadow:
+        0 0 20px #00F5FF,
+        0 0 40px #00D9FF;
+}
+
+.levelBtn.active {
+    background: #00ff00;
+    box-shadow: 0 0 25px #00ff00;
+}
+#game {
+    display: none;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#roundLabel {
+    font-size: 65px;
+    margin-bottom: 20px;
+    color: #ffff00;
+    text-shadow: 0 0 15px yellow;
+}
+#questionNumber {
+    font-size: 42px;
+    margin-bottom: 10px;
+    opacity: 0.8;
+}
+#question {
+    width: 96%;
+    max-width: 1800px;
+
+    font-size: 42px;
+
+    line-height: 1.4;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    margin-top: 20px;
+}
+#transition {
+    font-size: 70px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    text-shadow: 0 0 30px cyan;
+}
+#timerContainer {
+    width: 85%;
+    height: 50px;
+    background: #222;
+    border-radius: 40px;
+    overflow: hidden;
+    margin: 60px auto 25px auto;
+
+    box-shadow:
+        0 0 20px rgba(0,255,255,0.5),
+        inset 0 0 10px rgba(255,255,255,0.1);
+}
+
+#timerBar {
+    height: 100%;
+    width: 0%;
+    background: #00ff00;
+    transition: width 1s linear;
+    box-shadow: 0 0 20px #00ff00;
+}
+
+#timerText {
+    font-size: 90px;
+    margin-top: 20px;
+
+    font-weight: bold;
+
+    color: #00F5FF;
+
+    text-shadow:
+        0 0 10px #00F5FF,
+        0 0 25px #00F5FF,
+        0 0 45px cyan;
+}
+#timesup {
+    font-size: 60px;
+    color: red;
+    display: none;
+    margin-top: 20px;
+}
+#answer {
+    font-size: 45px;
+    color: #00ff00;
+    margin-top: 20px;
+    min-height: 60px;
+}
+#controls {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+#endScreen {
+    display: none;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: black;
+}
+#endScreen h1 {
+    font-size: 70px;
+    color: cyan;
+}
+</style>
+</head>
+<body>
+
+<!-- START SCREEN -->
+<div id="startScreen">
+    <div id="logo">ICT MONTH QUIZ BEE</div>
+   
+<div id="homeLogos">
+
+    <img src="dict_logo.png" id="homeLogo">
+
+    <img src="carmona_logo.png" id="homeLogo2">
+
+</div>
+
+    <h2>Select Level</h2>
+
+    <div>
+        <button class="levelBtn" onclick="selectLevel(this, 'ELEMENTARY')">ELEMENTARY</button>
+        <button class="levelBtn" onclick="selectLevel(this, 'JUNIOR')">JUNIOR HIGH</button>
+        <button class="levelBtn" onclick="selectLevel(this, 'SENIOR')">SENIOR HIGH</button>
+    </div>
+
+    <button id="startBtn" onclick="startQuiz()" style="display:none; margin-top: 30px; padding: 20px 50px; font-size: 24px;">
+        START QUIZ
+    </button>
+</div>
+
+<!-- GAME SCREEN -->
+<div id="game">
+    <img src="dict_logo.png" id="gameLogo">
+    <img src="carmona_logo.png" id="gameLogo2">
+
+
+    
+    <div id="transition"></div>
+    
+    <div id="roundLabel"></div>
+    <div id="questionNumber"></div>
+    <div id="question"></div>
+
+    <div id="timerContainer">
+        <div id="timerBar"></div>
+    </div>
+    <div id="timerText">10</div>
+
+    <div id="timesup">TIME'S UP!</div>
+    <div id="answer"></div>
+
+</div>
+
+<!-- END SCREEN -->
+<div id="endScreen">
+    <h1>QUIZ COMPLETE!</h1>
+    <p style="font-size: 30px; margin: 20px;">All rounds have been completed.</p>
+    <button onclick="location.reload()" style="padding: 20px 50px; font-size: 24px;">
+        RETURN TO MENU
+    </button>
+</div>
+
+<script>
+let selectedLevel = null;
+let questions = {};
+const rounds = ["EASY", "INTERMEDIATE", "HARD", "CLINCHER"];
+let rIndex = 0;
+let qIndex = 0;
+let timerInterval = null;
+let timerPaused = false;
+let currentAnswer = "";
+let popupCountdown;
+
+
+
+function selectLevel(btn, level) {
+    selectedLevel = level;
+    document.querySelectorAll(".levelBtn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById("startBtn").style.display = "inline-block";
+}
+
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+function startQuiz() {
+    if (!selectedLevel) {
+        alert("Please select a level first!");
+        return;
+    }
+
+    fetch("get_questions.php")
+        .then(res => res.json())
+        .then(data => {
+            questions = data[selectedLevel] || {};
+
+            // Shuffle and limit questions per round
+
+rounds.forEach(r => {
+
+    if (questions[r]) {
+
+        // RANDOMIZE QUESTIONS
+        questions[r] = questions[r]
+            .sort(() => Math.random() - 0.5);
+
+        // ONLY LIMIT EASY / INTERMEDIATE / HARD
+        if (r !== "CLINCHER") {
+            questions[r] = questions[r].slice(0, 5);
+        }
+
+    }
+
+});
+
+
+            document.getElementById("startScreen").style.display = "none";
+            document.getElementById("game").style.display = "flex";
+
+            rIndex = 0;
+            qIndex = 0;
+
+            showRoundIntro();
+        })
+        .catch(e => {
+            alert("Failed to load questions. Check your connection or question file.");
+            console.error(e);
+        });
+}
+
+function showRoundIntro() {
+
+    // =========================
+    // QUIZ FINISHED
+    // =========================
+    if (rIndex >= rounds.length) {
+        endQuiz();
+        return;
+    }
+
+    // =========================
+    // AFTER HARD ROUND
+    // ASK HOST IF TIE
+    // =========================
+    if (rounds[rIndex] === "CLINCHER") {
+
+        let proceedClincher = confirm(
+            "Is there a tie?\n\nPress OK to start CLINCHER ROUND.\nPress Cancel to end the quiz."
+        );
+
+        if (!proceedClincher) {
+            endQuiz();
+            return;
+        }
+    }
+
+    // =========================
+    // SKIP EMPTY ROUND
+    // =========================
+    if (!questions[rounds[rIndex]] || questions[rounds[rIndex]].length === 0) {
+        rIndex++;
+        showRoundIntro();
+        return;
+    }
+
+    // =========================
+    // HIDE GAME CONTENT
+    // =========================
+    document.getElementById("roundLabel").style.display = "none";
+    document.getElementById("questionNumber").style.display = "none";
+    document.getElementById("question").style.display = "none";
+    document.getElementById("timerContainer").style.display = "none";
+    document.getElementById("timerText").style.display = "none";
+    document.getElementById("timesup").style.display = "none";
+
+    // =========================
+    // SHOW TRANSITION SCREEN
+    // =========================
+    let t = document.getElementById("transition");
+
+    t.style.display = "block";
+
+    let roundName = rounds[rIndex];
+    // =========================
+// EASY ROUND (START ONLY)
+// =========================
+if (roundName === "EASY") {
+
+    t.innerHTML = `
+        <div style="font-size:80px;">
+            EASY ROUND
+        </div>
+
+        <div style="
+        font-size:28px;
+        margin-top:20px;
+        color:white;
+        ">
+            Get ready contestants!
+        </div>
+
+        <button onclick="continueRound()"
+        style="
+        margin-top:40px;
+        font-size:28px;
+        padding:20px 60px;
+        ">
+            START ROUND
+        </button>
+    `;
+
+// =========================
+// CLINCHER ROUND
+// =========================
+} else if (roundName === "CLINCHER") {
+
+        t.innerHTML = `
+            <div style="font-size:80px;">⚡ CLINCHER ROUND ⚡</div>
+
+            <div style="
+            font-size:28px;
+            margin-top:20px;
+            color:white;
+            ">
+                TIEBREAKER ROUND
+            </div>
+
+            <button onclick="continueRound()"
+            style="
+            margin-top:40px;
+            font-size:28px;
+            padding:20px 60px;
+            ">
+                CONTINUE
+            </button>
+        `;
+
+    } else {
+
+        t.innerHTML = `
+            <div style="font-size:80px;">
+                ${roundName} ROUND
+            </div>
+
+            <div style="
+            font-size:28px;
+            margin-top:20px;
+            color:white;
+            ">
+                We are now progressing to the next difficulty
+            </div>
+
+            <button onclick="continueRound()"
+            style="
+            margin-top:40px;
+            font-size:28px;
+            padding:20px 60px;
+            ">
+                CONTINUE
+            </button>
+        `;
+    }
+}
+function continueRound() {
+
+    document.getElementById("transition").style.display = "none";
+
+    document.getElementById("roundLabel").style.display = "block";
+    document.getElementById("questionNumber").style.display = "block";
+    document.getElementById("question").style.display = "block";
+    document.getElementById("timerContainer").style.display = "block";
+    document.getElementById("timerText").style.display = "block";
+
+    qIndex = 0;
+
+    displayQuestion();
+}
+
+function displayQuestion() {
+
+    document.getElementById("answer").innerText = "";
+    document.getElementById("timesup").style.display = "none";
+
+    timerPaused = false;
+
+    let currentRound = rounds[rIndex];
+    let list = questions[currentRound] || [];
+
+    if (qIndex >= list.length) {
+        rIndex++;
+        showRoundIntro();
+        return;
+    }
+
+    let q = list[qIndex];
+
+    document.getElementById("roundLabel").innerText =
+        currentRound + " ROUND";
+
+    document.getElementById("questionNumber").innerText =
+        "Question " + (qIndex + 1) + " of " + list.length;
+
+    // AUTO-RESIZE QUESTION TEXT
+    let questionSize = "72px";
+
+    if (q.question.length > 80) {
+        questionSize = "60px";
+    }
+
+    if (q.question.length > 130) {
+        questionSize = "50px";
+    }
+
+    if (q.question.length > 180) {
+        questionSize = "42px";
+    }
+
+    // AUTO-RESIZE CHOICES
+    let choiceSize = "52px";
+
+    if (q.question.length > 130) {
+        choiceSize = "44px";
+    }
+
+    if (q.question.length > 180) {
+        choiceSize = "38px";
+    }
+
+    let questionHTML = `
+
+        <div style="
+            font-size:${questionSize};
+
+            margin-bottom:60px;
+
+            line-height:1.25;
+
+            text-align:center;
+
+            max-width:1750px;
+
+            width:100%;
+
+            padding:0 100px;
+
+            box-sizing:border-box;
+
+            word-wrap:break-word;
+        ">
+            ${q.question}
+        </div>
+    `;
+
+    // EASY + INTERMEDIATE ONLY
+    if (currentRound === "EASY" || currentRound === "INTERMEDIATE") {
+
+        questionHTML += `
+
+        <div style="
+            display:grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap:50px 140px;
+
+            width:90%;
+
+            max-width:1700px;
+
+            margin:0 auto;
+
+            font-size:${choiceSize};
+
+            font-weight:bold;
+
+            text-align:center;
+
+            align-items:center;
+
+            justify-content:center;
+
+            line-height:1.3;
+        ">
+
+            <div>
+                A. ${q.choice_a}
+            </div>
+
+            <div>
+                B. ${q.choice_b}
+            </div>
+
+            <div>
+                C. ${q.choice_c}
+            </div>
+
+            <div>
+                D. ${q.choice_d}
+            </div>
+
+        </div>
+        `;
+    }
+
+    document.getElementById("question").innerHTML = questionHTML;
+
+    currentAnswer = q.answer;
+
+    startTimer();
+}
+
+function startTimer() {
+    let time = 10;
+    let bar = document.getElementById("timerBar");
+    let text = document.getElementById("timerText");
+
+    bar.style.width = "0%";
+    bar.style.background = "#00ff00";
+bar.style.boxShadow = "0 0 20px #00ff00";
+    text.innerText = time;
+
+    clearInterval(timerInterval);
+
+    timerInterval = setInterval(() => {
+        if (timerPaused) return;
+
+        time--;
+        text.innerText = time;
+
+        let percent = ((10 - time) / 10) * 100;
+        bar.style.width = percent + "%";
+
+        // Change color when low
+        if (time <= 3) {
+    bar.style.background = "#ff0000";
+    bar.style.boxShadow = "0 0 20px #ff0000";
+}
+
+        if (time <= 0) {
+            clearInterval(timerInterval);
+            showAnswer();
+        }
+    }, 1000);
+}
+
+
+function showAnswer() {
+
+    timerPaused = true;
+
+    clearInterval(timerInterval);
+
+    document.getElementById("timesup").style.display = "block";
+
+    document.getElementById("popupAnswer").innerText = currentAnswer;
+
+    document.getElementById("answerPopup").style.display = "flex";
+
+    // SHOW END BUTTON ONLY DURING CLINCHER
+    if (rounds[rIndex] === "CLINCHER") {
+        document.getElementById("endClincherBtn").style.display = "inline-block";
+    } else {
+        document.getElementById("endClincherBtn").style.display = "none";
+    }
+
+    // AUTO NEXT TIMER
+    let countdown = 5;
+
+    document.getElementById("popupTimer").innerText =
+        "Next question in " + countdown;
+
+    clearInterval(popupCountdown);
+
+    popupCountdown = setInterval(() => {
+
+        countdown--;
+
+        document.getElementById("popupTimer").innerText =
+            "Next question in " + countdown;
+
+        if (countdown <= 0) {
+
+            clearInterval(popupCountdown);
+
+            closePopup();
+        }
+
+    }, 1000);
+}
+
+function closePopup() {
+
+    clearInterval(popupCountdown);
+
+    document.getElementById("answerPopup").style.display = "none";
+
+    nextQuestion();
+}
+function endClincher() {
+
+    clearInterval(timerInterval);
+
+    endQuiz();
+}
+
+function nextQuestion() {
+    clearInterval(timerInterval);
+    qIndex++;
+    displayQuestion();
+}
+
+function endQuiz() {
+    document.getElementById("game").style.display = "none";
+    document.getElementById("endScreen").style.display = "flex";
+}
+
+// Allow spacebar to advance to next question
+document.addEventListener("keydown", function(e) {
+    if (e.code === "Space" && document.getElementById("game").style.display === "flex") {
+        e.preventDefault();
+        nextQuestion();
+    }
+});
+</script>
+
+<!-- ANSWER POPUP -->
+<div id="answerPopup" style="
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.85);
+justify-content:center;
+align-items:center;
+z-index:9999;
+">
+
+    <div style="
+    background:#111;
+    padding:50px;
+    border-radius:20px;
+    width:600px;
+    text-align:center;
+    box-shadow:0 0 30px cyan;
+    ">
+
+        <h1 style="
+        color:lime;
+        font-size:50px;
+        margin-bottom:20px;
+        ">
+            CORRECT ANSWER
+        </h1>
+
+        <div id="popupAnswer" style="
+        font-size:40px;
+        color:white;
+        margin-bottom:30px;
+        ">
+        </div>
+
+        <button onclick="closePopup()">
+            NEXT QUESTION
+        </button>
+        </button>
+
+<div id="popupTimer" style="
+margin-top:20px;
+font-size:28px;
+color:cyan;
+">
+Next question in 5
+</div>
+
+        <button id="endClincherBtn"
+onclick="endClincher()"
+style="
+margin-top:15px;
+background:red;
+color:white;
+display:none;
+">
+    END CLINCHER
+</button>
+
+    </div>
+
+</div>
+
+</body>
+</html>
