@@ -416,14 +416,12 @@ function showRoundIntro() {
     }
 
     // =========================
-    // HIDE GAME CONTENT
+    // HIDE GAME CONTENT (guarded)
     // =========================
-    document.getElementById("roundLabel").style.display = "none";
-    document.getElementById("questionNumber").style.display = "none";
-    document.getElementById("question").style.display = "none";
-    document.getElementById("timerContainer").style.display = "none";
-    document.getElementById("timerText").style.display = "none";
-    document.getElementById("timesup").style.display = "none";
+    ["roundLabel", "questionNumber", "question", "timerContainer", "timerText", "timesup"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = "none";
+    });
 
     // =========================
     // SHOW TRANSITION SCREEN
@@ -515,13 +513,13 @@ if (roundName === "EASY") {
 }
 function continueRound() {
 
-    document.getElementById("transition").style.display = "none";
+    const transitionEl = document.getElementById("transition");
+    if (transitionEl) transitionEl.style.display = "none";
 
-    document.getElementById("roundLabel").style.display = "block";
-    document.getElementById("questionNumber").style.display = "block";
-    document.getElementById("question").style.display = "block";
-    document.getElementById("timerContainer").style.display = "block";
-    document.getElementById("timerText").style.display = "block";
+    ["roundLabel", "questionNumber", "question", "timerContainer", "timerText"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = "block";
+    });
 
     qIndex = 0;
 
@@ -530,8 +528,10 @@ function continueRound() {
 
 function displayQuestion() {
 
-    document.getElementById("answer").innerText = "";
-    document.getElementById("timesup").style.display = "none";
+    const answerEl = document.getElementById("answer");
+    if (answerEl) answerEl.innerText = "";
+    const timesupEl = document.getElementById("timesup");
+    if (timesupEl) timesupEl.style.display = "none";
 
     timerPaused = false;
 
