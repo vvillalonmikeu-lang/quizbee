@@ -96,7 +96,7 @@ INSERT INTO `questions` (`id`, `section`, `difficulty`, `question`, `answer`, `c
 (137, 'SENIOR', 'HARD', 'What is the main job of RAM?', 'Temporary memory for active programs', NULL, NULL, NULL, NULL),
 (138, 'SENIOR', 'HARD', 'Why should devices be updated regularly?', 'To fix bugs and improve security', NULL, NULL, NULL, NULL),
 (139, 'SENIOR', 'HARD', 'What is digital footprint?', 'Information left behind online', NULL, NULL, NULL, NULL),
-(140, 'SENIOR', 'HARD', 'Which of these is safest online?', 'Using strong passwords', NULL, NULL, NULL, NULL),
+//(140, 'SENIOR', 'HARD', 'Which of these is safest online?', 'Using strong passwords', NULL, NULL, NULL, NULL),
 (141, 'SENIOR', 'HARD', 'Why is backing up data important?', 'To recover files if devices fail', NULL, NULL, NULL, NULL),
 (142, 'SENIOR', 'HARD', 'Which device converts digital signals for internet connection?', 'Modem', NULL, NULL, NULL, NULL),
 (143, 'SENIOR', 'HARD', 'What is spyware?', 'Malware that secretly collects information', NULL, NULL, NULL, NULL),
