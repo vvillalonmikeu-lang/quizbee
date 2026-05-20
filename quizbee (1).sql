@@ -480,7 +480,6 @@ INSERT INTO `questions` (`id`, `section`, `difficulty`, `question`, `answer`, `c
 (520, 'JUNIOR', 'HARD', 'What is the term for data that has been processed into meaningful information?', 'Information'),
 (521, 'JUNIOR', 'HARD', 'What do you call a software that allows users to browse the internet?', 'Web browser'),
 (522, 'JUNIOR', 'HARD', 'What is the process of organizing data into rows and columns called in a spreadsheet?', 'Tabulation'),
-(523, 'JUNIOR', 'HARD', 'What is the term for connecting multiple networks together globally?', 'Internetworking'),
 (523, 'TEACHERS', 'EASY', 'What is the term for connecting multiple networks together globally?', 'Internetworking');
 (524, 'TEACHERS', 'EASY', 'What does LMS stand for?', 'A','Learning Management System','Logical Monitoring System','Learning Media Setup','Local Management Server'),
 (525, 'TEACHERS', 'EASY', 'Which application is commonly used for making classroom presentations?', 'B','Microsoft Excel','Microsoft PowerPoint','Microsoft Access','Microsoft Word'),
