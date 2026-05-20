@@ -15,13 +15,8 @@ function run(cmd, args, opts = {}) {
 
 (async () => {
   try {
-    const fixer = path.resolve('scripts', 'fix-sql-insert.mjs');
     const importer = path.resolve('scripts', 'import-sql-to-mongodb.mjs');
     const sql = 'quizbee (1).sql';
-    const fixed = 'quizbee-fixed.sql';
-
-    console.log('Running SQL fixer...');
-    await run('node', [fixer, sql, fixed]);
 
     if (!process.env.MONGODB_URI) {
       console.log('MONGODB_URI not set — skipping import.');
@@ -35,7 +30,7 @@ function run(cmd, args, opts = {}) {
     }
 
     console.log('Running importer...');
-    await run('node', [importer, fixed]);
+    await run('node', [importer, sql]);
 
     console.log('Import complete.');
   } catch (err) {
