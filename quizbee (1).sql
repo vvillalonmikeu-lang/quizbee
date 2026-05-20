@@ -481,6 +481,7 @@ INSERT INTO `questions` (`id`, `section`, `difficulty`, `question`, `answer`, `c
 (521, 'JUNIOR', 'HARD', 'What do you call a software that allows users to browse the internet?', 'Web browser'),
 (522, 'JUNIOR', 'HARD', 'What is the process of organizing data into rows and columns called in a spreadsheet?', 'Tabulation'),
 (523, 'JUNIOR', 'HARD', 'What is the term for connecting multiple networks together globally?', 'Internetworking');
+(523, 'TEACHERS', 'EASY', 'What is the term for connecting multiple networks together globally?', 'Internetworking');
 --
 -- Indexes for dumped tables
 --
