@@ -96,7 +96,7 @@ INSERT INTO `questions` (`id`, `section`, `difficulty`, `question`, `answer`, `c
 (137, 'SENIOR', 'HARD', 'What is the main job of RAM?', 'Temporary memory for active programs', NULL, NULL, NULL, NULL),
 (138, 'SENIOR', 'HARD', 'Why should devices be updated regularly?', 'To fix bugs and improve security', NULL, NULL, NULL, NULL),
 (139, 'SENIOR', 'HARD', 'What is digital footprint?', 'Information left behind online', NULL, NULL, NULL, NULL),
-#(140, 'SENIOR', 'HARD', 'Which of these is safest online?', 'Using strong passwords', NULL, NULL, NULL, NULL),
+(140, 'SENIOR', 'HARD', 'Which of these is safest online?', 'Using strong passwords', NULL, NULL, NULL, NULL),
 (141, 'SENIOR', 'HARD', 'Why is backing up data important?', 'To recover files if devices fail', NULL, NULL, NULL, NULL),
 (142, 'SENIOR', 'HARD', 'Which device converts digital signals for internet connection?', 'Modem', NULL, NULL, NULL, NULL),
 (143, 'SENIOR', 'HARD', 'What is spyware?', 'Malware that secretly collects information', NULL, NULL, NULL, NULL),
@@ -389,8 +389,7 @@ INSERT INTO `questions` (`id`, `section`, `difficulty`, `question`, `answer`, `c
 (430, 'SENIOR', 'HARD', 'What is the role of natural language processing (NLP)?', 'A', 'A. Understand human language', 'B. Increase RAM', 'C. Build circuits', 'D. Encrypt databases'),
 (431, 'SENIOR', 'HARD', 'Quantum computing is based on?', 'A', 'A. Qubits', 'B. Transistors only', 'C. Mechanical gears', 'D. Optical disks'),
 (432, 'SENIOR', 'HARD', 'What is edge AI?', 'A', 'A. AI on local devices', 'B. Cloud-only AI', 'C. Offline gaming', 'D. Spreadsheet automation'),
-(433, 'SENIOR', 'HARD', 'Purpose of data mining?', 'A', 'A. Find patterns in data', 'B. Delete files', 'C. Compress videos', 'D. Fix hardware');
-INSERT INTO `questions` (`id`, `section`, `difficulty`, `question`, `answer`, `choice_a`, `choice_b`, `choice_c`, `choice_d`) VALUES
+(433, 'SENIOR', 'HARD', 'Purpose of data mining?', 'A', 'A. Find patterns in data', 'B. Delete files', 'C. Compress videos', 'D. Fix hardware'),
 (434, 'SENIOR', 'HARD', 'What is a neural network?', 'A', 'A. Brain-inspired AI model', 'B. Network cables', 'C. Server rack', 'D. Database table'),
 (435, 'SENIOR', 'HARD', 'Smart contracts are used to?', 'A', 'A. Auto-execute agreements', 'B. Encrypt images', 'C. Speed up WiFi', 'D. Repair systems'),
 (436, 'SENIOR', 'HARD', 'Distributed database means?', 'A', 'A. Data stored across systems', 'B. Single computer DB', 'C. Offline storage', 'D. Local folder only'),
@@ -415,7 +414,7 @@ INSERT INTO `questions` (`id`, `section`, `difficulty`, `question`, `answer`, `c
 (455, 'SENIOR', 'HARD', 'RPA means?', 'A', 'A. Automating tasks', 'B. Manual processing', 'C. Hardware repair', 'D. Game design'),
 (456, 'SENIOR', 'HARD', 'Sentiment analysis detects?', 'A', 'A. Emotions in text', 'B. Hardware errors', 'C. Internet speed', 'D. File size'),
 (457, 'SENIOR', 'HARD', 'Digital ecosystem is?', 'A', 'A. Connected digital environment', 'B. Offline system', 'C. Single app', 'D. Hardware only'),
-(458, 'SENIOR', 'HARD', 'Explainable AI means?', 'A', 'A. AI decisions are understandable', 'B. Hidden AI', 'C. Random AI', 'D. Offline AI');
+(458, 'SENIOR', 'HARD', 'Explainable AI means?', 'A', 'A. AI decisions are understandable', 'B. Hidden AI', 'C. Random AI', 'D. Offline AI'),
 (459, 'JUNIOR', 'EASY', 'What device is used to move the cursor on a computer screen?', 'A. Mouse', 'Mouse', 'Keyboard', 'Printer', 'Speaker'),
 (460, 'JUNIOR', 'EASY', 'Which key is commonly used to erase letters?', 'C. Backspace', 'Enter', 'Shift', 'Backspace', 'Tab'),
 (461, 'JUNIOR', 'EASY', 'What do you call the physical parts of a computer?', 'B. Hardware', 'Software', 'Hardware', 'Internet', 'Folder'),
@@ -430,7 +429,7 @@ INSERT INTO `questions` (`id`, `section`, `difficulty`, `question`, `answer`, `c
 (470, 'JUNIOR', 'INTERMEDIATE', 'What should you do before clicking a suspicious link?', 'A. Check if it is safe', 'Check if it is safe', 'Share it immediately', 'Delete your files', 'Turn off the computer'),
 (471, 'JUNIOR', 'INTERMEDIATE', 'What is cloud storage?', 'D. Online storage for files', 'A weather application', 'A computer game', 'A keyboard feature', 'Online storage for files'),
 (472, 'JUNIOR', 'INTERMEDIATE', 'Which application is commonly used for online meetings?', 'C. Zoom', 'Excel', 'Paint', 'Zoom', 'WordPad'),
-(473, 'JUNIOR', 'INTERMEDIATE', 'Why is it important to use strong passwords?', 'B. To keep accounts secure', 'To make typing harder', 'To keep accounts secure', 'To speed up the internet', 'To increase screen brightness');
+(473, 'JUNIOR', 'INTERMEDIATE', 'Why is it important to use strong passwords?', 'B. To keep accounts secure', 'To make typing harder', 'To keep accounts secure', 'To speed up the internet', 'To increase screen brightness'),
 (474, 'ELEMENTARY', 'EASY', 'What do you use to type letters on a computer?', 'B. Keyboard', 'Mouse', 'Keyboard', 'Printer', 'Speaker'),
 (475, 'ELEMENTARY', 'EASY', 'Which device shows pictures and videos from the computer?', 'A. Monitor', 'Monitor', 'Keyboard', 'Scanner', 'Router'),
 (476, 'ELEMENTARY', 'EASY', 'What button is used to turn on a computer?', 'C. Power button', 'Spacebar', 'Enter key', 'Power button', 'Shift key'),
@@ -450,7 +449,7 @@ INSERT INTO `questions` (`id`, `section`, `difficulty`, `question`, `answer`, `c
 (490, 'ELEMENTARY', 'INTERMEDIATE', 'What is used to search for information on the internet?', 'D. Search engine', 'Speaker', 'Scanner', 'Printer', 'Search engine'),
 (491, 'ELEMENTARY', 'INTERMEDIATE', 'What happens when a file is deleted?', 'C. It is removed from storage', 'It becomes faster', 'The monitor turns off', 'It is removed from storage', 'The keyboard stops working'),
 (492, 'ELEMENTARY', 'INTERMEDIATE', 'Which of these is a video-sharing platform?', 'A. YouTube', 'YouTube', 'Excel', 'WordPad', 'Calculator'),
-(493, 'ELEMENTARY', 'INTERMEDIATE', 'Why should you update software regularly?', 'B. To improve security and performance', 'To slow down the computer', 'To delete files', 'To improve security and performance', 'To change the keyboard');
+(493, 'ELEMENTARY', 'INTERMEDIATE', 'Why should you update software regularly?', 'B. To improve security and performance', 'To slow down the computer', 'To delete files', 'To improve security and performance', 'To change the keyboard'),
 (494, 'ELEMENTARY', 'HARD', 'What do you call the main circuit board inside a computer?', 'Motherboard'),
 (495, 'ELEMENTARY', 'HARD', 'What is the term for harmful software that can damage a computer?', 'Malware'),
 (496, 'ELEMENTARY', 'HARD', 'What type of storage device uses no moving parts and is faster than an HDD?', 'SSD'),
@@ -465,7 +464,7 @@ INSERT INTO `questions` (`id`, `section`, `difficulty`, `question`, `answer`, `c
 (505, 'ELEMENTARY', 'HARD', 'What do you call the temporary memory used by a computer while programs are running?', 'RAM'),
 (506, 'ELEMENTARY', 'HARD', 'What is the term for copying data from the internet to your device?', 'Download'),
 (507, 'ELEMENTARY', 'HARD', 'What is the term for sending data from your device to the internet?', 'Upload'),
-(508, 'ELEMENTARY', 'HARD', 'What do you call the icons, menus, and windows shown on a computer screen?', 'Graphical User Interface');
+(508, 'ELEMENTARY', 'HARD', 'What do you call the icons, menus, and windows shown on a computer screen?', 'Graphical User Interface'),
 (509, 'JUNIOR', 'HARD', 'What is the full form of CPU?', 'Central Processing Unit'),
 (510, 'JUNIOR', 'HARD', 'What does RAM stand for?', 'Random Access Memory'),
 (511, 'JUNIOR', 'HARD', 'What is the main function of an operating system?', 'To manage hardware and software resources'),
@@ -480,7 +479,7 @@ INSERT INTO `questions` (`id`, `section`, `difficulty`, `question`, `answer`, `c
 (520, 'JUNIOR', 'HARD', 'What is the term for data that has been processed into meaningful information?', 'Information'),
 (521, 'JUNIOR', 'HARD', 'What do you call a software that allows users to browse the internet?', 'Web browser'),
 (522, 'JUNIOR', 'HARD', 'What is the process of organizing data into rows and columns called in a spreadsheet?', 'Tabulation'),
-(523, 'TEACHERS', 'EASY', 'What is the term for connecting multiple networks together globally?', 'Internetworking');
+(523, 'TEACHERS', 'EASY', 'What is the term for connecting multiple networks together globally?', 'Internetworking'),
 (524, 'TEACHERS', 'EASY', 'What does LMS stand for?', 'A','Learning Management System','Logical Monitoring System','Learning Media Setup','Local Management Server'),
 (525, 'TEACHERS', 'EASY', 'Which application is commonly used for making classroom presentations?', 'B','Microsoft Excel','Microsoft PowerPoint','Microsoft Access','Microsoft Word'),
 (526, 'TEACHERS', 'EASY', 'Which shortcut key is used to paste copied text?', 'C','Ctrl + X','Ctrl + Z','Ctrl + V','Ctrl + P'),
@@ -500,7 +499,7 @@ INSERT INTO `questions` (`id`, `section`, `difficulty`, `question`, `answer`, `c
 (540, 'TEACHERS', 'CLINCHER', 'What is the term for a collection of related data organized for easy access and management?', 'Database','', '', '', ''),
 (541, 'TEACHERS', 'CLINCHER', 'What protocol automatically assigns IP addresses to devices in a network?', 'DHCP','', '', '', ''),
 (542, 'TEACHERS', 'CLINCHER', 'What is the process of converting readable data into coded form to protect information?', 'Encryption','', '', '', ''),
-(543, 'TEACHERS', 'CLINCHER', 'What network topology connects all devices to a central hub or switch?', 'Star Topology','', '', '', '');
+(543, 'TEACHERS', 'CLINCHER', 'What network topology connects all devices to a central hub or switch?', 'Star Topology','', '', '', ''),
 (544, 'TEACHERS', 'EASY', 'Which device is used to scan printed documents into a computer?', 'B', 'Monitor', 'Scanner', 'Keyboard', 'Speaker'),
 (545, 'TEACHERS', 'EASY', 'Which key is commonly used to refresh a webpage?', 'A', 'F5', 'F1', 'Esc', 'Tab'),
 (546, 'TEACHERS', 'EASY', 'What is commonly used to connect a computer to the internet wirelessly?', 'D', 'USB', 'Scanner', 'Projector', 'Wi-Fi'),
