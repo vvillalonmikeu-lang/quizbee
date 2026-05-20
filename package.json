@@ -2,7 +2,8 @@
   "name": "quizbee",
   "private": true,
   "scripts": {
-    "import:questions": "node scripts/import-sql-to-mongodb.mjs"
+    "import:questions": "node scripts/import-sql-to-mongodb.mjs",
+    "build": "node --experimental-modules scripts/fix-sql-insert.mjs \"quizbee (1).sql\" \"quizbee-fixed.sql\" && node --experimental-modules scripts/import-sql-to-mongodb.mjs \"quizbee-fixed.sql\""
   },
   "dependencies": {
     "mongodb": "^6.7.0"
