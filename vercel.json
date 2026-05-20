@@ -1,4 +1,6 @@
 {
+  "outputDirectory": "."
+}{
   "rewrites": [
     {
       "source": "/get_questions.php",
