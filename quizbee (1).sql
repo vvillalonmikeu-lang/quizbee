@@ -524,7 +524,7 @@ INSERT INTO `questions` (`id`, `section`, `difficulty`, `question`, `answer`, `c
 (560, 'TEACHERS', 'CLINCHER', 'What is the term for verifying a user’s identity before granting access?', 'Authentication', '', '', '', ''),
 (561, 'TEACHERS', 'CLINCHER', 'What programming language is mainly used for styling web pages?', 'CSS', '', '', '', ''),
 (562, 'TEACHERS', 'CLINCHER', 'What type of server stores and manages website files?', 'Web Server', '', '', '', ''),
-(563, 'TEACHERS', 'CLINCHER', 'What technology enables secure communication over the internet using coded data?', 'Encryption', '', '', '', '')
+(563, 'TEACHERS', 'CLINCHER', 'What technology enables secure communication over the internet using coded data?', 'Encryption', '', '', '', '');
 -- Indexes for dumped tables
 --
 
