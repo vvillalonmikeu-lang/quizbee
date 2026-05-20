@@ -38,3 +38,4 @@ function run(cmd, args, opts = {}) {
     process.exit(1);
   }
 })();
+
