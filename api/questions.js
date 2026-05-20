@@ -69,8 +69,8 @@ async function readBody(req) {
 }
 
 function validateQuestionInput(payload) {
-  const level = normalizeText(payload.level);
-  const round = normalizeText(payload.round);
+  const level = normalizeText(payload.level).toUpperCase();
+  const round = normalizeText(payload.round).toUpperCase();
   const question = normalizeText(payload.question);
   const answer = normalizeText(payload.answer);
   const choiceA = normalizeText(payload.choice_a);
