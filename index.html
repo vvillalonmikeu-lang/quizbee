@@ -46,7 +46,12 @@ overflow-y: auto;
     gap: 50px;
     margin-bottom: 30px;
 }
-
+#levelContainer {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
 #homeLogo {
     width: 280px;
     filter: drop-shadow(0 0 15px cyan)
@@ -273,6 +278,7 @@ button:hover {
         <button class="levelBtn" onclick="selectLevel(this, 'ELEMENTARY')">ELEMENTARY</button>
         <button class="levelBtn" onclick="selectLevel(this, 'JUNIOR')">JUNIOR HIGH</button>
         <button class="levelBtn" onclick="selectLevel(this, 'SENIOR')">SENIOR HIGH</button>
+        <button class="levelBtn" onclick="selectLevel(this, 'TEACHERS')">TEACHERS</button>
     </div>
 
     <button id="startBtn" onclick="startQuiz()" style="display:none; margin-top: 30px; padding: 20px 50px; font-size: 24px;">
